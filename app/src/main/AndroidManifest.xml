@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.microsoft.projectoxford.face.samples" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+        />
+
+    <application
+        android:name=".helper.SampleApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+
+
+
+        </activity>
+
+
+        <activity android:name=".ui.SplashActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.RegisterActivity"></activity>
+        <activity
+            android:name=".ui.DetectionActivity"
+            android:label="@string/detection"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.FaceVerificationActivity"
+            android:label="@string/face_verification"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.VerificationMenuActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.PersonVerificationActivity"
+            android:label="@string/person_verification"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.VerificationMenuActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.SelectImageActivity"
+            android:label="@string/select_an_image"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.VerificationMenuActivity"
+            android:label="@string/verification"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".log.DetectionLogActivity"
+            android:label="@string/detection_log"
+            android:parentActivityName=".ui.DetectionActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.DetectionActivity" />
+        </activity>
+        <activity
+            android:name=".log.VerificationLogActivity"
+            android:label="@string/verification_log"
+            android:parentActivityName=".ui.FaceVerificationActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.FaceVerificationActivity" />
+        </activity>
+    </application>
+
+</manifest>

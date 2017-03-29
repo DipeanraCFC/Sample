@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="done_and_save" type="id">done_and_save</item>
+    <item name="infos" type="id">info</item>
+</resources>
