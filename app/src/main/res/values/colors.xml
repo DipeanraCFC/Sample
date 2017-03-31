@@ -2,6 +2,7 @@
 <resources>
     <color name="button_pressed_background">#427cb6</color>
     <color name="button_enabled_background">#5cd779</color>
+    <color name="login_background">#8051d963</color>
     <color name="button_disabled_background">#C0C0C0</color>
     <color name="login_bg">#60a885d1</color>
     <color name="colorPrimary">#3F51B5</color>
@@ -10,9 +11,7 @@
     <color name="white">#ffffff</color>
     <color name="detection_bg">#796d64</color>
     <color name="black">#000000</color>
-
-
-
+    <color name="button_login">#8013a8ce</color>
 
 
 </resources>

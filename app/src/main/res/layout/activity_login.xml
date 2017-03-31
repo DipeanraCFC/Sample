@@ -1,90 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/login_background"
-    android:orientation="vertical"
-    android:padding="20dp">
+    android:background="@color/login_background"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:background="@color/login_bg"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="20dp">
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="-20dp"
+            android:src="@drawable/face_icon" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-smallcaps"
-            android:text=" ---Login---"
+            android:text=" ------Sign in------"
             android:textColor="#898888"
-            android:textSize="40dp"
-
+            android:textSize="30dp"
 
             />
 
-
-        <EditText
-            android:id="@+id/activity_login_email_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-            android:drawableLeft="@drawable/email_icon"
-            android:drawablePadding="10dp"
-            android:fontFamily="serif"
-            android:hint="Email"
-
-        />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-    <EditText
-        android:id="@+id/activity_login_password_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:drawableLeft="@drawable/password_icon"
-        android:drawablePadding="10dp"
-        android:fontFamily="serif"
-        android:hint="Password"
-        android:inputType="textPassword"
+            <EditText
+                android:id="@+id/activity_login_email_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/email_icon"
+                android:drawablePadding="10dp"
+                android:fontFamily="serif"
+                android:hint="Email"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
 
-        />
+                />
+
+        </android.support.design.widget.TextInputLayout>
 
 
-    <Button
-        android:id="@+id/activity_login_login_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif"
-        android:text="login"
-        android:textColor="#686565"
-        android:textSize="20dp"
-        />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/activity_login_register_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="sans-serif"
-        android:text="register"
-        android:textColor="#686565"
-        android:textSize="20dp"
-        />
-    <TextView
-        android:id="@+id/activity_login_forgot_password_textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Forgot Password?"
-        android:textAlignment="center"
-        android:textColor="@color/red"
-        android:textSize="15dp" />
+            app:passwordToggleEnabled="true"
+
+            >
+
+
+            <EditText
+                android:id="@+id/activity_login_password_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/password_icon"
+                android:drawablePadding="10dp"
+                android:fontFamily="serif"
+                android:hint="Password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:maxLines="1"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/activity_login_login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="sans-serif"
+            android:text="sign in"
+            android:textColor="#686565"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/activity_login_register_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="sans-serif"
+            android:text="Sign up"
+            android:textColor="#686565"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/activity_login_forgot_password_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Forgot Password?"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="15dp" />
 
     </LinearLayout>
 
