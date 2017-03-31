@@ -44,7 +44,8 @@
         android:textColorHint="#000"
         />
 
-    <EditText
+
+            <EditText
         android:id="@+id/activity_register_password_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +55,18 @@
         android:textColorHint="#000"
         />
 
-    <EditText
+
+            <EditText
+                android:id="@+id/activity_register_confirmpassword_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:textColorHint="#000" />
+
+
+            <EditText
         android:id="@+id/activity_register_address_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,21 +1,16 @@
 package com.microsoft.projectoxford.face.samples.POJO;
 
-/**
- * Created by Sushsant Khatiwada on 12/27/2016.
- * Object banauda jaile CONSTRUCTUR ko through bata pass hunu parcha
- * getter ra setter ni hunu parcha
- */
 
 public class User {
 
-    String email, id, address, phone;
+    public String email, address, phone, name;
 
     //alt+insert
-    public User(String email, String id, String address, String phone) {
+    public User(String email, String address, String phone, String name) {
         this.email = email;
-        this.id = id;
         this.address = address;
         this.phone = phone;
+        this.name = name;
     }
 
     public String getEmail() {
@@ -26,13 +21,6 @@ public class User {
         this.email = email;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getAddress() {
         return address;
@@ -42,11 +30,22 @@ public class User {
         this.address = address;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+
+
     }
 }

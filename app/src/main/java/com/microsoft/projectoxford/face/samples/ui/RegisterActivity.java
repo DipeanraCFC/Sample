@@ -29,18 +29,16 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText mNameEditText, mEmailEditText, mPasswordEditText, mAddressEditText, mPhoneEditText;
+    EditText mNameEditText, mEmailEditText, mPasswordEditText, mAddressEditText, mPhoneEditText, mConfirmPasswordEditText;
     Button mRegisterButton, mLoginButton;
     ProgressDialog mProgressDialog;
-    String name, email, password, phone, address;
+    String email, password;
+    Uri file;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabaseMain;
     private StorageReference mStorageRef;
     private StorageReference riversRef;
-    Uri file;
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,11 +46,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-
         mNameEditText = (EditText) findViewById(R.id.activity_register_name_editText);
         mEmailEditText = (EditText) findViewById(R.id.activity_register_email_editText);
         mAddressEditText = (EditText) findViewById(R.id.activity_register_address_editText);
         mPasswordEditText = (EditText) findViewById(R.id.activity_register_password_editText);
+        mConfirmPasswordEditText = (EditText) findViewById(R.id.activity_register_confirmpassword_editText);
         mPhoneEditText = (EditText) findViewById(R.id.activity_register_phone_editText);
 
         mRegisterButton = (Button) findViewById(R.id.activity_register_register_button);
@@ -98,41 +96,35 @@ public class RegisterActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = mEmailEditText.getText().toString();
-                password = mPasswordEditText.getText().toString();
-                address = mAddressEditText.getText().toString();
-                phone = mPhoneEditText.getText().toString();
-                name = mNameEditText.getText().toString();
+                email = mEmailEditText.getText().toString().trim();
+                password = mPasswordEditText.getText().toString().trim();
 
 
-                if (mEmailEditText.getText().toString().length()<1)
+                if (mNameEditText.getText().toString().length() < 1) {
+                    mNameEditText.setError("Please enter name");
+                } else if (mEmailEditText.getText().toString().length() < 1) {
+                    mEmailEditText.setError("Please enter email");
+                } else if (mPasswordEditText.getText().toString().length() < 1) {
+                    mPasswordEditText.setError("Please enter password");
+                } else if (!mConfirmPasswordEditText.getText().toString().equals(mPasswordEditText.getText().toString()))
+
                 {
-                    mEmailEditText.setError("Enter Email");
-                }
-                else if (mNameEditText.getText().toString().length()<1)
-                {
-                    mNameEditText.setError("Enter Name");
-                }
-                else if (mPhoneEditText.getText().toString().length()<1)
-                {
-                    mNameEditText.setError("Enter Phone");
-                }
-                else if (mAddressEditText.getText().toString().length()<1)
-                {
-                    mAddressEditText.setError("Enter Phone");
-                }
-                else if (mPasswordEditText.getText().toString().length()<1)
-                {
-                    mPasswordEditText.setError("Enter Password");
-                }
-                else if (!isValidEmailID(mEmailEditText.getText().toString())) {
-                    Toast.makeText(RegisterActivity.this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
-                    //  mEmailEditText.setError("Please Enter Valid Email");
-                }
-                else
-                {
+                    mConfirmPasswordEditText.setError("Password  not matched");
+
+                } else if (mAddressEditText.getText().toString().length() < 1) {
+
+
+
+                } else if (mPasswordEditText.getText().toString().length() < 6) {
+                    mAddressEditText.setError("Password must contain 6 characters");
+                } else if (mPhoneEditText.getText().toString().length() < 1) {
+                    mPhoneEditText.setError("Please enter Phone");
+                } else if (!isValidEmailID(mEmailEditText.getText().toString())) {
+                    // Toast.makeText(RegisterActivity.this, "Please enter valid email address", Toast.LENGTH_SHORT).show();
+                    mEmailEditText.setError("Please enter valid email");
+                } else {
                     mProgressDialog = new ProgressDialog(RegisterActivity.this);
-                    mProgressDialog.setTitle("Signing up...");
+                    mProgressDialog.setTitle("Signing in");
                     mProgressDialog.show();
                     mProgressDialog.setCancelable(false);
                     newEmailPassword();
@@ -154,7 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
     public void newEmailPassword() {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -165,11 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (task.isSuccessful()) {
                     //write code for when register is successful
                     //after register successful this code adds new username
-
-
                     addUsername();
-
-
 
                 } else {
                     mProgressDialog.dismiss();
@@ -179,11 +166,15 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void addUsername(){
+    public void addUsername() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String email = mEmailEditText.getText().toString().trim();
 
-        User user = new User(email,userId,address,phone);
+        String name = mNameEditText.getText().toString().trim();
+        String address = mAddressEditText.getText().toString().trim();
+        String phone = mPhoneEditText.getText().toString().trim();
+
+        User user = new User(email, address, phone, name);
         mDatabaseMain.child("username").child(userId).setValue(user);
 
         Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
@@ -193,7 +184,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-
 
 
     @Override
@@ -209,6 +199,7 @@ public class RegisterActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
     private boolean isValidEmailID(String email) {
 
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
@@ -218,8 +209,6 @@ public class RegisterActivity extends AppCompatActivity {
                 + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
-
-
 
 
 }
