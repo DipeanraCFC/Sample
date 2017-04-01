@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText mNameEditText, mEmailEditText, mPasswordEditText, mAddressEditText, mPhoneEditText, mConfirmPasswordEditText;
-    Button mRegisterButton, mLoginButton;
+    Button mRegisterButton;
     ProgressDialog mProgressDialog;
     String email, password;
     Uri file;
@@ -54,7 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
         mPhoneEditText = (EditText) findViewById(R.id.activity_register_phone_editText);
 
         mRegisterButton = (Button) findViewById(R.id.activity_register_register_button);
-        mLoginButton = (Button) findViewById(R.id.activity_register_login_button);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -134,14 +133,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
 

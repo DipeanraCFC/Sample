@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/login_background"
+    android:background="@color/register_background"
     android:orientation="vertical"
     android:padding="20dp"
 
@@ -33,14 +33,6 @@
 
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Personal details"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -54,7 +46,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:hint="Name"
+                    android:drawableLeft="@drawable/name_icon"
+                    android:drawablePadding="20dp"
+                    android:hint="Full Name"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:textColorHint="#000"
@@ -64,73 +58,6 @@
 
 
             </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-
-                >
-
-                <EditText
-                    android:id="@+id/activity_register_email_editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="Email"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:textColorHint="#000"
-
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true"
-
-                >
-
-                <EditText
-                    android:id="@+id/activity_register_password_editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="Password"
-                    android:imeOptions="actionNext"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:textColorHint="#000" />
-
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                app:passwordToggleEnabled="true">
-
-                <EditText
-                    android:id="@+id/activity_register_confirmpassword_editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:hint="Confirm Password"
-                    android:imeOptions="actionNext"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:textColorHint="#000"
-
-
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -144,6 +71,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/address"
+                    android:drawablePadding="20dp"
                     android:hint="Address"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
@@ -166,6 +95,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/phone_icon"
+                    android:drawablePadding="20dp"
                     android:hint="Phone Number"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
@@ -176,26 +107,93 @@
 
             </android.support.design.widget.TextInputLayout>
 
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                >
+
+                <EditText
+                    android:id="@+id/activity_register_email_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/email_icon"
+                    android:drawablePadding="20dp"
+                    android:hint="Email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColorHint="#000"
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+
+                >
+
+                <EditText
+                    android:id="@+id/activity_register_password_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/password_icon"
+                    android:drawablePadding="20dp"
+                    android:hint="Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColorHint="#000"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/activity_register_confirmpassword_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:drawableLeft="@drawable/password_icon"
+                    android:drawablePadding="20dp"
+                    android:hint="Confirm Password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColorHint="#000"
+
+
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+
             <Button
                 android:id="@+id/activity_register_register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/rounded_button"
+                android:drawableLeft="@drawable/continue_icon"
                 android:fontFamily="sans-serif"
-                android:text="Register"
+                android:text="continue"
                 android:textColor="#686565"
-                android:textSize="20dp" />
+                android:textSize="20dp"
 
-            <Button
-                android:id="@+id/activity_register_login_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_button"
-                android:fontFamily="sans-serif"
-                android:text="Cancel"
-                android:textColor="#686565"
-                android:textSize="20dp" />
+                />
 
 
         </LinearLayout>

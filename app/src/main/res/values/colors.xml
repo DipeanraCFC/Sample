@@ -12,6 +12,7 @@
     <color name="detection_bg">#796d64</color>
     <color name="black">#000000</color>
     <color name="button_login">#8013a8ce</color>
+    <color name="register_background">#80377281</color>
 
 
 </resources>
