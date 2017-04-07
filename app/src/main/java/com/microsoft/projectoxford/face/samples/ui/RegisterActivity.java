@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 import com.microsoft.projectoxford.face.samples.POJO.User;
 import com.microsoft.projectoxford.face.samples.R;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
@@ -61,10 +63,11 @@ public class RegisterActivity extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+
                 } else {
                     // User is signed out
                 }
-                // ...
+
             }
         };
         mDatabaseMain = FirebaseDatabase.getInstance().getReference();
@@ -101,29 +104,34 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (mNameEditText.getText().toString().length() < 1) {
                     mNameEditText.setError("Please enter name");
+                } else if (mAddressEditText.getText().toString().length() < 1) {
+                    mAddressEditText.setError("Please enter address");
+
+
+                } else if (mPhoneEditText.getText().toString().length() < 1) {
+                    mPhoneEditText.setError("Please enter Phone");
                 } else if (mEmailEditText.getText().toString().length() < 1) {
                     mEmailEditText.setError("Please enter email");
                 } else if (mPasswordEditText.getText().toString().length() < 1) {
                     mPasswordEditText.setError("Please enter password");
-                } else if (!mConfirmPasswordEditText.getText().toString().equals(mPasswordEditText.getText().toString()))
-
-                {
+                } else if (!mConfirmPasswordEditText.getText().toString().equals(mPasswordEditText.getText().toString())) {
                     mConfirmPasswordEditText.setError("Password  not matched");
 
-                } else if (mAddressEditText.getText().toString().length() < 1) {
+
+                } else if (mPasswordEditText.getText().toString().length() < 8) {
+                    mPasswordEditText.setError("Password must must contain 8 characters combined of alphabets and numbers");
 
 
+                } else if (!isValidPassword(mPasswordEditText.getText().toString())) {
 
-                } else if (mPasswordEditText.getText().toString().length() < 6) {
-                    mAddressEditText.setError("Password must contain 6 characters");
-                } else if (mPhoneEditText.getText().toString().length() < 1) {
-                    mPhoneEditText.setError("Please enter Phone");
-                } else if (!isValidEmailID(mEmailEditText.getText().toString())) {
-                    // Toast.makeText(RegisterActivity.this, "Please enter valid email address", Toast.LENGTH_SHORT).show();
-                    mEmailEditText.setError("Please enter valid email");
+                    mPasswordEditText.setError("Password invalid");
+
+                } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
+                    mEmailEditText.setError("Please enter valid email address");
                 } else {
                     mProgressDialog = new ProgressDialog(RegisterActivity.this);
-                    mProgressDialog.setTitle("Signing in");
+                    mProgressDialog.setTitle("Signing up");
                     mProgressDialog.show();
                     mProgressDialog.setCancelable(false);
                     newEmailPassword();
@@ -135,6 +143,35 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+
+  /*  FirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task < AuthResult> task) {
+            if (task.isSuccessful()) {
+                sendVerificationEmail();
+            }
+        }
+    }*/
+
+
+
+  /*  public void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "Signup successful.Verification email sent", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+
+    }*/
 
 
     public void newEmailPassword() {
@@ -150,6 +187,7 @@ public class RegisterActivity extends AppCompatActivity {
                     addUsername();
 
                 } else {
+
                     mProgressDialog.dismiss();
                     Toast.makeText(RegisterActivity.this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
                 }
@@ -191,7 +229,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isValidEmailID(String email) {
+   /* private boolean isValidEmailID(String email) {
 
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
                 + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
@@ -200,6 +238,21 @@ public class RegisterActivity extends AppCompatActivity {
                 + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
+*/
+
+    public boolean isValidPassword(String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+        String PASSWORD_PATTERN = "^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+
+    }
 
 
 }
+

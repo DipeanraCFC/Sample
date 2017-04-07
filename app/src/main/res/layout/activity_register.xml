@@ -26,10 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
                 android:text="Register a new account"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/black"
                 android:textSize="25dp"
+
 
                 />
 
@@ -98,8 +100,9 @@
                     android:drawableLeft="@drawable/phone_icon"
                     android:drawablePadding="20dp"
                     android:hint="Phone Number"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:inputType="phone"
+                    android:maxLength="10"
                     android:maxLines="1"
                     android:textColorHint="#000"
 
@@ -150,8 +153,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:textColorHint="#000"
-                    />
+                    android:textColorHint="#000" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -170,7 +172,7 @@
                     android:drawableLeft="@drawable/password_icon"
                     android:drawablePadding="20dp"
                     android:hint="Confirm Password"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:textColorHint="#000"

@@ -3,12 +3,10 @@ package com.microsoft.projectoxford.face.samples.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.microsoft.projectoxford.face.samples.R;
 
 import java.util.regex.Pattern;
@@ -30,8 +27,9 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mEmailEditText, mPasswordEditText;
     Button mLoginButton, mRegisterButton;
-    String email, password;
+    String email, password, newPass, oldpass;
     ProgressDialog progressDialog;
+    TextView mForgetPassword;
     private FirebaseAuth mAuth;
 
 
@@ -45,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         mPasswordEditText = (EditText) findViewById(R.id.activity_login_password_editText);
         mLoginButton = (Button) findViewById(R.id.activity_login_login_button);
         mRegisterButton = (Button) findViewById(R.id.activity_login_register_button);
+        mForgetPassword = (TextView) findViewById(R.id.activity_login_forgot_password_textview);
 
 
         mLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +54,13 @@ public class LoginActivity extends AppCompatActivity {
                 password = mPasswordEditText.getText().toString();
 
                 if (mEmailEditText.getText().toString().length() < 1) {
-                    mEmailEditText.setError("Please Enter Email");
+                    mEmailEditText.setError("Please enter Email");
+
                 } else if (mPasswordEditText.getText().toString().length() < 1) {
-                    mPasswordEditText.setError("Please Enter Password");
+                    mPasswordEditText.setError("Please enter Password");
+
                 } else if (!isValidEmailID(mEmailEditText.getText().toString())) {
-                    Toast.makeText(LoginActivity.this, "Enter Valid Email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, " Please enter Valid Email", Toast.LENGTH_SHORT).show();
                     //  mEmailEditText.setError("Please Enter Valid Email");
                 } else {
                     signIn();
@@ -74,6 +75,34 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
+        });
+
+        mForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                String emailAddress = mEmailEditText.getText().toString();
+                auth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(LoginActivity.this, "Email sent", Toast.LENGTH_SHORT).show();
+                                } else if (!task.isSuccessful()) {
+
+                                    Toast.makeText(LoginActivity.this, "Email address is not registered.", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                    Toast.makeText(LoginActivity.this, "Check internet Connection", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+
+            }
+
+
         });
 
 
@@ -114,10 +143,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (!task.isSuccessful()) { //login failed
                         progressDialog.dismiss();
                         //Log.w(TAG, "signInWithEmail:failed", task.getException());
-                        Toast.makeText(LoginActivity.this, "Login Failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Invalid username or password.", Toast.LENGTH_SHORT).show();
                     } else if (task.isSuccessful()) { //login successful
                         progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, "Login Successgul.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login Successful.", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
                     } else {
